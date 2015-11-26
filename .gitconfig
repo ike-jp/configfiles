@@ -1,0 +1,13 @@
+[user]
+	email = ike-jp@outlook.com
+	name = ike-jp
+[core]
+	editor = vim
+	excludesfile = /home/vagrant/.gitignore
+[alias]
+	co = checkout
+	st = status
+	c = commit
+	hist = log --pretty=format:\\\"%h %ad | %s%d [%an]\\\" --graph --date=short
+[color]
+	ui = auto
