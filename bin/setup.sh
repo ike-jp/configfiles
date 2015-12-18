@@ -7,9 +7,9 @@
 #curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh > git-prompt.sh
 
 # vimrcのsymlink作成
-ln -sf ~/configfiles/vimrc ~/.vimrc
+ln -sf ~/dotfiles/vimrc ~/.vimrc
 
 # gitconfigのsymlink作成
-ln -sf ~/configfiles/gitconfig ~/.gitconfig
+ln -sf ~/dotfiles/gitconfig ~/.gitconfig
 
 
