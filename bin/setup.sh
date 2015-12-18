@@ -9,5 +9,7 @@
 # vimrcのsymlink作成
 ln -s ~/configfiles/vimrc ~/.vimrc
 
+# gitconfigのsymlink作成
+ln -s ~/configfiles/gitconfig ~/.gitconfig
 
 
