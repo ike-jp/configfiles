@@ -1,8 +1,29 @@
 " =========================================================
-"  MyVimrc
-" + referenced:http://whileimautomaton.net/2008/08/vimworkshop3-kana-presentation
-" + Font : Win = Myrica M, Ubuntu = Osaka
+" MyVimrc
+" - referenced:
+"     - vim-boostrap.com
+"     - http://whileimautomaton.net/2008/08/vimworkshop3-kana-presentation
+" - Font :
+"     - Win: Myrica M
+"     - Ubuntu: Osaka
 " =========================================================
+if has('vim_starting')
+	"vi互換無効
+	set nocompatible
+	set rtp+=~/.vim/bundle/neobundle.vim
+endif
+
+let neobundle_readme=expand('~/.vim/bundle/neobundle.vim/README.md')
+if !filereadable(neobundle_readme)
+	echo "Installing NeoBundle..."
+	echo ""
+	silent !mkdir -p ~/.vim/bundle
+	silent !git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim/
+	let g:not_finsh_neobundle = "yes"
+
+	" Run shell script if exist on custom select language
+endif
+
 " ---------------------------------------------------------
 " 基本設定
 " ---------------------------------------------------------
@@ -11,9 +32,6 @@
 	"タイトルをバッファ名に変更しない
 	set notitle
 	set shortmess+=I
-
-	" vi互換無効
-	set nocompatible
 
 	" ターミナル接続を高速化する
 	set ttyfast
@@ -227,9 +245,6 @@ syntax on	"必須
 " Neobundle plugin manager
 " ---------------------------------------------------------
 filetype off
-if has('vim_starting')
-set rtp+=~/.vim/bundle/neobundle.vim
-endif
 
 call neobundle#begin(expand('~/.vim/bundle'))
 NeoBundleFetch 'Shougo/neobundle.vim'
