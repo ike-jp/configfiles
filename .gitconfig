@@ -1,15 +1,31 @@
+##
+# gitconfig
+#
+# gitconfigファイルはsystem > global > localの順に読まれ
+# 後から読み込んだデータに上書きされる
+#
+
 [http]
 	postBuffer = 524288000
+
 [user]
 	email = ike-jp@outlook.com
 	name = ike-jp
+
 [core]
 	editor = vim
 	excludesfile = /home/vagrant/.gitignore
+
 [alias]
 	co = checkout
 	st = status
 	c = commit
 	hist = log --pretty=format:\\\"%h %ad | %s%d [%an]\\\" --graph --date=short
+
 [color]
 	ui = auto
+
+[fetch]
+	# git fetchした際にリモートリポジトリで削除されているものを
+	# ローカルリポジトリでも削除する
+	prune = true
