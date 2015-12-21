@@ -24,6 +24,19 @@ if !filereadable(neobundle_readme)
 	" Run shell script if exist on custom select language
 endif
 
+
+" ---------------------------------------------------------
+" Memo
+" ---------------------------------------------------------
+" ### バージョン表示
+" :version
+"
+" ### 最後にその設定を行ったファイルを表示する
+" :verbose set <設定名>?
+" 例) :verbose set tabstop?
+"
+
+
 " ---------------------------------------------------------
 " 基本設定
 " ---------------------------------------------------------
@@ -135,7 +148,7 @@ endif
 	set listchars=tab:\|\-,trail:~
 
 	"タブの文字数
-	set tabstop	=4
+	set tabstop=4
 
 	"履歴の数
 	set history=1000
@@ -208,13 +221,26 @@ endif
 	" vimを開いたディレクトリを基準にディレクトリを指定することもできる。
 
 
-" ---------------------------------------------------------
-" 詳細設定
-" ---------------------------------------------------------
 syntax on	"必須
+" ---------------------------------------------------------
+" 言語別設定
+" --------------------------------------------------------
+"### Python
 
-"### プラグインを使わないPHP構文エラーチェック
+	" Pythonはスペース4つでインデントすることが推奨されている
+	" TABのインデントはスペース8個分になるので、基本はスペースでインデントする
+	" tabが押された場合などにTAB文字ではなく、スペースを差し込む設定
+	" また、スペースが4つ続いた場所でbackspaceを押した際にインデント分のスペースを削除する
+	" http://d.hatena.ne.jp/over80/20090305/1236264851
+	autocmd FileType python setl autoindent
+	autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+	autocmd FileType python setl tabstop=8 expandtab shiftwidth=4 softtabstop=4
 
+
+"^^^^^^^^^^^
+"### PHP
+
+	"プラグインを使わないPHP構文エラーチェック
 	augroup PHP_SyntaxCheck
 		autocmd!
 		"WatchDogsによる構文チェックは重い可能性があるので
@@ -222,6 +248,11 @@ syntax on	"必須
 		autocmd FileType php set makeprg=php\ -l\ %
 		autocmd BufWritePost *.php silent make | if len(getqflist()) != 1 | copen | else | cclose | endif | redraw!
 	augroup END
+
+
+" ---------------------------------------------------------
+" その他
+" ---------------------------------------------------------
 
 
 "^^^^^^^^^^^
@@ -301,8 +332,8 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 	" ----------------------------
 	NeoBundle 'ujihisa/unite-colorscheme'			"Unite colorscheme -auto-previewでカラースキームをプレビュー
 	NeoBundle 'nanotech/jellybeans.vim'
-	NeoBundle 'adlawson/vim-sorcerer'
-	NeoBundle 'duythinht/inori'
+"	NeoBundle 'adlawson/vim-sorcerer'
+"	NeoBundle 'duythinht/inori'
 
 "	NeoBundle 'drillbits/nyan-modoki.vim'			"ステータスバーに猫が表示される
 "	NeoBundle 'nathanaelkane/vim-indent-guides'
@@ -314,17 +345,17 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 	" ----------------------------
 	NeoBundle 'joonty/vdebug.git'					"VDebug(dbgpクライアント)
 
-	NeoBundle 'mattn/webapi-vim'					"ideone-vim用
-	NeoBundle 'mattn/ideone-vim'					"バッファ上のコードをideoneに送って結果を受け取れる
+"	NeoBundle 'mattn/webapi-vim'					"ideone-vim用
+"	NeoBundle 'mattn/ideone-vim'					"バッファ上のコードをideoneに送って結果を受け取れる
 
 	"オンラインジャッジ
 	" ----------------------------
-	NeoBundle 'eagletmt/onlinejudge-vim'			"プロコンのsubmitとかできる
+"	NeoBundle 'eagletmt/onlinejudge-vim'			"プロコンのsubmitとかできる
 "	NeoBundle 'yuratomo/w3m.vim'					"CUIのWEBブラウザ。環境にw3mをインストールする必要がある
 
 	"その他
 	" ----------------------------
-	NeoBundle 'mattn/hahhah-vim'					"ハァハァできる
+"	NeoBundle 'mattn/hahhah-vim'					"ハァハァできる
 
 	"gVim用
 	" ----------------------------
