@@ -335,7 +335,6 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 "	NeoBundle 'adlawson/vim-sorcerer'
 "	NeoBundle 'duythinht/inori'
 
-"	NeoBundle 'drillbits/nyan-modoki.vim'			"ステータスバーに猫が表示される
 "	NeoBundle 'nathanaelkane/vim-indent-guides'
 	NeoBundle 'itchyny/lightline.vim'				"リッチなステータスバー
 	NeoBundle 'bronson/vim-trailing-whitespace'		"行末の半角スペースを可視化 / FixWhitespaceで行末の余計な空白を掃除できる
@@ -371,7 +370,10 @@ call neobundle#end()
 " ---------------------------------------------------------
 " plugin settings
 " ---------------------------------------------------------
-"### Neocomplete
+" ##
+" # neocomplete | 補完
+" #
+if neobundle#is_installed('neocomplete')
 
 	"NeocompleteはNeocomplcacheの後継。
 	"Vim7.4以降でLua拡張がないと動かないので注意
@@ -403,9 +405,13 @@ call neobundle#end()
 	inoremap <expr><C-g>     neocomplete#undo_completion()
 	inoremap <expr><C-l>     neocomplete#complete_common_string()
 
+endif
 
-"^^^^^^^^^^^
-"### NERDTree
+
+" ##
+" # NERDTree | ファイラ
+" #
+if neobundle#is_installed('nerdtree')
 
 	"ファイルが指定されているときは自動的にNERDTreeを起動する。
 	"そうでなければコマンドで:NERDTreeで起動。
@@ -429,47 +435,54 @@ call neobundle#end()
 	"NERDTreeウィンドウに行番号を表示する
 	"let NERDTreeShowLineNumbers=1
 
+endif
 
-"^^^^^^^^^^^
-"### Syntastic - コードチェッカ
 
+" ##
+" # Syntastic | コードチェッカ
+" #
+if neobundle#is_installed('syntastic')
 	":SyntasticToggleで切り替え
 
-"	set statusline+=%#warningmsg#
-"	set statusline+=%{SyntasticStatuslineFlag()}
-"	set statusline+=%*
-"
-"	"PHPで使う構文チェッカ
-"	let g:syntastic_php_checkers = ['php', 'phpmd', 'phpcs']
-"
-"	let g:syntasitc_enable_signs = 1
-"
-"	"Vimを起動したディレクトリにあるruleset.xmlを見にいく
-"	let g:syntastic_php_phpcs_args = '--standard=ruleset.xml'
-"
-"	"let g:syntastic_php_phpmd_post_args = 'phpmd_ruleset.xml'
-"
-"	"ファイルを開いたときにチェックする
-"	"falseだと保存したときにチェックされる
-"	let g:syntastic_check_on_open = 1
-"
-"	let g:syntastic_ignore_files = ['\.ctp$']
-"	let g:syntastic_aggregate_errors = 1
-"	let g:syntastic_always_populate_loc_list = 1
-"	let g:syntastic_auto_loc_list = 2
-"	let g:syntastic_check_on_wq = 0
-"	let g:syntastic_echo_current_error = 1
-"	let g:syntastic_enable_highlighting = 1
-"	let g:syntastic_error_symbol = '?'
-"	let g:syntastic_warning_symbol = '!'
+	set statusline+=%#warningmsg#
+	set statusline+=%{SyntasticStatuslineFlag()}
+	set statusline+=%*
 
+	"PHPで使う構文チェッカ
+	let g:syntastic_php_checkers = ['php', 'phpmd', 'phpcs']
 
-"^^^^^^^^^^^
-"### Watchdogs - コードチェッカ
+	let g:syntasitc_enable_signs = 1
 
-if !exists("g:quickrun_config")
-	let g:quickrun_config = {}
+	"Vimを起動したディレクトリにあるruleset.xmlを見にいく
+	let g:syntastic_php_phpcs_args = '--standard=ruleset.xml'
+
+	"let g:syntastic_php_phpmd_post_args = 'phpmd_ruleset.xml'
+
+	"ファイルを開いたときにチェックする
+	"falseだと保存したときにチェックされる
+	let g:syntastic_check_on_open = 1
+
+	let g:syntastic_ignore_files = ['\.ctp$']
+	let g:syntastic_aggregate_errors = 1
+	let g:syntastic_always_populate_loc_list = 1
+	let g:syntastic_auto_loc_list = 2
+	let g:syntastic_check_on_wq = 0
+	let g:syntastic_echo_current_error = 1
+	let g:syntastic_enable_highlighting = 1
+	let g:syntastic_error_symbol = '?'
+	let g:syntastic_warning_symbol = '!'
+
 endif
+
+
+" ##
+" # WatchDogs | コードチェッカ
+" #
+if neobundle#is_installed('watchdogs')
+
+	if !exists("g:quickrun_config")
+		let g:quickrun_config = {}
+	endif
 
 	"#### Global
 
@@ -512,32 +525,36 @@ endif
 			\ }
 	endif
 
-"作成した設定をWatchDogsに
-call watchdogs#setup(g:quickrun_config)
+	"作成した設定をWatchDogsに
+	call watchdogs#setup(g:quickrun_config)
 
-" ### Watchdogs エイリアス
+	" ### Watchdogs エイリアス
 
-	":CSで構文チェックを行う
-	command! CS WatchdogsRun
+		":CSで構文チェックを行う
+		command! CS WatchdogsRun
 
-	":CEでWatchDogsとハイライトを止める
-	function! WatchdogsEnd()
-		:WatchdogsRunSweep
-		:QfsignsClear
-	endfunction
-	command! CE call WatchdogsEnd()
+		":CEでWatchDogsとハイライトを止める
+		function! WatchdogsEnd()
+			:WatchdogsRunSweep
+			:QfsignsClear
+		endfunction
+		command! CE call WatchdogsEnd()
 
-" ### Optional
+	" ### Optional
 
-	" If syntax error, cursor is moved at line setting sign.
-	let g:qfsigns#AutoJump = 1
+		" If syntax error, cursor is moved at line setting sign.
+		let g:qfsigns#AutoJump = 1
 
-	" If syntax error, view split and cursor is moved at line setting sign.
-	"let g:qfsigns#AutoJump = 2
+		" If syntax error, view split and cursor is moved at line setting sign.
+		"let g:qfsigns#AutoJump = 2
+
+endif
 
 
-"^^^^^^^^^^^
-"### LightLine
+" ##
+" # LightLine | ステータスバー
+" #
+if neobundle#is_installed('lightline.vim')
 
 	let g:lightline = {
 		\ 'colorscheme': 'jellybeans',
@@ -574,46 +591,64 @@ call watchdogs#setup(g:quickrun_config)
 		endif
 	endfunction
 
-
-"^^^^^^^^^^^
-"### CTags
-
-	"#### auto_cgats
-
-		" ファイル保存の度にctagsコマンドを自動発行する
-		"let g:auto_ctags=0
-
-		" tagsファイルの名前(default:tags)
-		"let g:auto_ctags_tags_name='.tags'
-
-		" 保存場所を変更した場合の読み込むファイルの指定
-		"set tags+=.tags
-
-	"#### SrcExpl
-
-		"SrcExpl起動時にtagsファイルをアップデートする
-		let g:SrcExpl_UpdateTags=1
-
-	"#### taglist
-
-		"Ctagsコマンドの場所
-"		let Tlist_Ctags_Cmd="$HOME/local/bin/ctags"
-
-		"自動ハイライト
-		"let Tlist_Auto_Hightlight_Tag=1
-
-		"現在表示中のファイルのみのタグしか表示しない
-"		let Tlist_Show_One_File=1
-
-		"右側にtag listのウィンドウを表示
-"		let Tlist_Use_Right_Window=1
-
-		"taglistのウィンドウだけならVimを閉じる
-"		let Tlist_Exit_OnlyWindow=1
+endif
 
 
-"^^^^^^^^^^^
-"### VDebug
+" ##
+" # auto-ctags | 自動でctagsファイルを生成する
+" #
+if neobundle#is_installed('auto-ctags.vim')
+
+	" ファイル保存の度にctagsコマンドを自動発行する
+	"let g:auto_ctags=0
+
+	" tagsファイルの名前(default:tags)
+	"let g:auto_ctags_tags_name='.tags'
+
+	" 保存場所を変更した場合の読み込むファイルの指定
+	"set tags+=.tags
+
+endif
+
+
+" ##
+" # SrcExpl |
+" #
+if neobundle#is_installed('SrcExpl')
+
+	"SrcExpl起動時にtagsファイルをアップデートする
+	let g:SrcExpl_UpdateTags = 1
+
+endif
+
+
+" ##
+" # TagList | 定義されている関数を一覧表示
+" #
+if neobundle#is_installed('taglist.vim')
+
+	"Ctagsコマンドの場所
+	let Tlist_Ctags_Cmd="$HOME/local/bin/ctags"
+
+	"自動ハイライト
+	let Tlist_Auto_Hightlight_Tag = 1
+
+	"現在表示中のファイルのみのタグしか表示しない
+	let Tlist_Show_One_File = 1
+
+	"右側にtag listのウィンドウを表示
+	let Tlist_Use_Right_Window = 1
+
+	"taglistのウィンドウだけならVimを閉じる
+	let Tlist_Exit_OnlyWindow = 1
+
+endif
+
+
+" ##
+" # VDebug | デバッガ
+" #
+if neobundle#is_installed('vdebug.git')
 
 	let g:vdebug_options = {}
 	let g:vdebug_options["port"]=9000
@@ -636,46 +671,56 @@ call watchdogs#setup(g:quickrun_config)
 		let g:vdebug_options["ide_key"]=a:key
 	endfunction
 
-
-"^^^^^^^^^^^
-"### WebAPI+Ideone
-
-	let g:ideone_open_buffer_after_post=1
+endif
 
 
-"^^^^^^^^^^^
-"### Nyan_Modoki settings
+" ##
+" # WebAPI + Ideone | Vimからideoneにコードを送って結果を受け取れる
+" #
+if neobundle#is_installed('ideone-vim')
 
-	"set statusline=%F%m%r%h%w[%{&ff}]%=%{g:NyanModoki()}(%l,%c)[%P]
-	"let g:nyan_modoki_select_cat_face_number=2
-	"let g:nyan_modoki_animation_enabled=1
-	"set statusline=%{expand('%:p:t')}\ %<[%{expand('%:p:h')}]%=\ %m%r%y%w[%{&fenc!=''?&fenc:&enc}][%{&ff}][%3l,%3c,%3p]
+	let g:ideone_open_buffer_after_post = 1
+
+endif
 
 
-"^^^^^^^^^^^
-"### vim-indent-guides settings
+" ##
+" # vim-indent-guides | インデントガイド
+" #
+if neobundle#is_installed('vim-indent-guides')
 
-	"vimを立ち上げたときに自動的にindent_guideをオンにする
-	"let g:indent_guides_enable_on_vim_startup=1
-	"hi IndentGuidesOdd ctermbg=black
-	"hi IndentGuidesEven ctermbg=darkgrey
+	" vimを立ち上げたときに自動的にindent_guideをオンにする
+	let g:indent_guides_enable_on_vim_startup=1
+	hi IndentGuidesOdd ctermbg=black
+	hi IndentGuidesEven ctermbg=darkgrey
 
-"^^^^^^^^^^^
-"### Online Judge
+endif
 
-	"vimからOnline Judgeを楽しむためのプラグイン
+
+" ##
+" # Online judge | vimからプロコンする
+" #
+if neobundle#is_installed('vim-indent-guides')
+
 	let g:onlinegudge_account = {
 		\ 'poj' : {'user': 'example', 'pass': 'password'},
 		\ 'aoj' : {},
 		\ }
 
-"^^^^^^^^^^^
-"### color scheme
+endif
+
+
+" ##
+" # jelly beans | カラースキーム
+" #
+if neobundle#is_installed('jellybeans.vim')
 
 	"正しく表示されないときは
 	"export TERM=xterm-256colorを.bashrcなどに記述する必要がある。
 	colorscheme jellybeans
 "	set bg=dark
+
+endif
 
 
 filetype on		"ファイルタイプを元に戻す
