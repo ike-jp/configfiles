@@ -478,7 +478,7 @@ endif
 " ##
 " # WatchDogs | コードチェッカ
 " #
-if neobundle#is_installed('watchdogs')
+if neobundle#is_installed('vim-watchdogs')
 
 	if !exists("g:quickrun_config")
 		let g:quickrun_config = {}
