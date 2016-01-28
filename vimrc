@@ -530,23 +530,23 @@ if neobundle#is_installed('vim-watchdogs')
 
 	" ### Watchdogs エイリアス
 
-		":CSで構文チェックを行う
-		command! CS WatchdogsRun
+	":CSで構文チェックを行う
+	command! CS WatchdogsRun
 
-		":CEでWatchDogsとハイライトを止める
-		function! WatchdogsEnd()
-			:WatchdogsRunSweep
-			:QfsignsClear
-		endfunction
-		command! CE call WatchdogsEnd()
+	":CEでWatchDogsとハイライトを止める
+	function! WatchdogsEnd()
+		:WatchdogsRunSweep
+		:QfsignsClear
+	endfunction
+	command! CE call WatchdogsEnd()
 
 	" ### Optional
 
-		" If syntax error, cursor is moved at line setting sign.
-		let g:qfsigns#AutoJump = 1
+	" If syntax error, cursor is moved at line setting sign.
+	let g:qfsigns#AutoJump = 1
 
-		" If syntax error, view split and cursor is moved at line setting sign.
-		"let g:qfsigns#AutoJump = 2
+	" If syntax error, view split and cursor is moved at line setting sign.
+	"let g:qfsigns#AutoJump = 2
 
 endif
 
