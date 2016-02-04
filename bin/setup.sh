@@ -12,4 +12,6 @@ ln -sf ~/dotfiles/vimrc ~/.vimrc
 # gitconfigのsymlink作成
 ln -sf ~/dotfiles/gitconfig ~/.gitconfig
 
+# profileのsymlink作成
+ln -sf ~/dotfiles/profile ~/.profile
 
