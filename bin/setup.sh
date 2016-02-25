@@ -15,3 +15,6 @@ ln -sf ~/dotfiles/gitconfig ~/.gitconfig
 # profileのsymlink作成
 ln -sf ~/dotfiles/profile ~/.profile
 
+# bash_aliasesのsymlink作成
+ln -sf ~/dotfiles/bash_aliases ~/.bash_aliases
+
