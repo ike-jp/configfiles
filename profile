@@ -1,12 +1,14 @@
 
-# bashのプロンプトにgitのbranch名を表示する
-#source ~/configfiles/opt/git-completion.bash
-#PS1="\h@\u:\W\$(__git_ps1) \$ "
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.bashrc" ]; then
+    . "$HOME/.bashrc"
+    fi
+fi
 
-# grepをデフォルトでカラー表示
-alias grep="grep --color"
-
-# lsだけで詳細情報表示
-alias ls="ls -lah --color"
-
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
 

@@ -319,18 +319,18 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 	"ファイル管理(ファイラ)
 	" ----------------------------
 	NeoBundle 'Shougo/unite.vim.git'
-	NeoBundle 'Shougo/unite-outline'
+"T	NeoBundle 'Shougo/unite-outline'
 	NeoBundle 'scrooloose/nerdtree'					"\:NERDTreeでツリーを表示する
 
 	"ソースアクセス
 	" ----------------------------
 "	NeoBundle 'soramugi/auto-ctags.vim'				"関数ジャンプのためのctagsのタグ作成を自動で行う
-	NeoBundle 'wesleyche/SrcExpl'
-	NeoBundle 'vim-scripts/taglist.vim'				"定義されている関数を一覧表示する
+"T	NeoBundle 'wesleyche/SrcExpl'
+"T	NeoBundle 'vim-scripts/taglist.vim'				"定義されている関数を一覧表示する
 
 	"カラースキーム
 	" ----------------------------
-	NeoBundle 'ujihisa/unite-colorscheme'			"Unite colorscheme -auto-previewでカラースキームをプレビュー
+"T	NeoBundle 'ujihisa/unite-colorscheme'			"Unite colorscheme -auto-previewでカラースキームをプレビュー
 	NeoBundle 'nanotech/jellybeans.vim'
 "	NeoBundle 'adlawson/vim-sorcerer'
 "	NeoBundle 'duythinht/inori'
@@ -338,11 +338,11 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 "	NeoBundle 'nathanaelkane/vim-indent-guides'
 	NeoBundle 'itchyny/lightline.vim'				"リッチなステータスバー
 	NeoBundle 'bronson/vim-trailing-whitespace'		"行末の半角スペースを可視化 / FixWhitespaceで行末の余計な空白を掃除できる
-	NeoBundle 'severin-lemaignan/vim-minimap'		"ミニマップを表示(Python拡張が必要)
+"T	NeoBundle 'severin-lemaignan/vim-minimap'		"ミニマップを表示(Python拡張が必要)
 
 	"外部連携
 	" ----------------------------
-	NeoBundle 'joonty/vdebug.git'					"VDebug(dbgpクライアント)
+"T	NeoBundle 'joonty/vdebug.git'					"VDebug(dbgpクライアント)
 
 "	NeoBundle 'mattn/webapi-vim'					"ideone-vim用
 "	NeoBundle 'mattn/ideone-vim'					"バッファ上のコードをideoneに送って結果を受け取れる
