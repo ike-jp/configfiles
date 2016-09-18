@@ -365,7 +365,7 @@ autocmd BufEnter ==Translate==\ Excite nnoremap <buffer> <silent> q :<C-u>close<
 "
 "正しく表示されないときは
 "export TERM=xterm-256colorを.bashrcなどに記述する必要がある。
-colorscheme Iceberg
+colorscheme iceberg
 "colorscheme Wombat
 "colorscheme rdark
 "colorscheme railscasts
