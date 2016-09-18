@@ -18,3 +18,6 @@ ln -sf ~/dotfiles/profile ~/.profile
 # bash_aliasesのsymlink作成
 ln -sf ~/dotfiles/bash_aliases ~/.bash_aliases
 
+# ctagsコンフィングのsymlink作成
+ln -sf ~/dotfiles/ctags ~/.ctags
+

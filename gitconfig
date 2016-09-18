@@ -14,12 +14,13 @@
 
 [core]
 	editor = vim
-	excludesfile = /home/vagrant/.gitignore
+	excludesfile = ~/.gitignore
 
 [alias]
 	co = checkout
 	st = status
 	c = commit
+	bra = branch
 	hist = log --pretty=format:\\\"%h %ad | %s%d [%an]\\\" --graph --date=short
 
 [color]

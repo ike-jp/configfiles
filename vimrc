@@ -8,8 +8,6 @@
 "     - Ubuntu: Osaka
 " =========================================================
 if has('vim_starting')
-	"vi互換無効
-	set nocompatible
 	set rtp+=~/.vim/bundle/neobundle.vim
 endif
 
@@ -169,11 +167,12 @@ endif
 			autocmd VimEnter,ColorScheme * highlight SignColumn ctermbg=none
 			autocmd VimEnter,ColorScheme * highlight VertSplit ctermbg=none
 			autocmd VimEnter,ColorScheme * highlight NonText ctermbg=none
-			"autocmd VimEnter,ColorScheme * highlight SpecialKey ctermbg=none ctermfg=255 "タブ部分の透過色を指定
+			"autocmd VimEnter,ColorScheme * highlight SpecialKey ctermbg=none ctermfg=255
+			"タブ部分の透過色を指定
 			"+ SpecialKey : タブ、文末空白などのハイライトグループ
-			"+ cterm      : カラーターミナルのハイライト方法
-			"+ ctermfg    : カラーターミナルの文字色
-			"+ ctermbg    : カラーターミナルの背景色
+			"+ cterm      :カラーターミナルのハイライト方法
+			"+ ctermfg    :カラーターミナルの文字色
+			"+ ctermbg    :カラーターミナルの背景色
 		augroup END
 	endif
 
@@ -195,6 +194,9 @@ endif
 	":NeoBundleReloadでvimrcを読み直す
 	command! NeoBundleReload source $MYVIMRC
 
+	"PHPUnit test
+	command! TS !phpunit %
+	command! TS2 !phpunit % | less
 
 "^^^^^^^^^^^
 "### ヘルプ
@@ -235,6 +237,12 @@ syntax on	"必須
 	autocmd FileType python setl autoindent
 	autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 	autocmd FileType python setl tabstop=8 expandtab shiftwidth=4 softtabstop=4
+
+"### HTML
+
+"	autocmd FileType html setl autoindent
+"	autocmd FileType html setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+"	autocmd FileType html setl tabstop=8 expandtab shiftwidth=4 softtabstop=4
 
 
 "^^^^^^^^^^^
@@ -302,7 +310,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 		\     'windows' : 'make -f make_mingw32.mak',
 		\     'cygwin' : 'make -f make_cygwin.mak',
 		\     'mac' : 'make -f make_mac.mak',
-		\     'unix' : 'gmake -f make_unix.mak',
+		\     'unix' : 'make -f make_unix.mak',
 		\    },
 		\ }
 	NeoBundle "thinca/vim-quickrun"
@@ -327,11 +335,13 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 "	NeoBundle 'soramugi/auto-ctags.vim'				"関数ジャンプのためのctagsのタグ作成を自動で行う
 "T	NeoBundle 'wesleyche/SrcExpl'
 "T	NeoBundle 'vim-scripts/taglist.vim'				"定義されている関数を一覧表示する
+	NeoBundle "ctrlpvim/ctrlp.vim"					"ファイルをファジー検索できる
 
 	"カラースキーム
 	" ----------------------------
-"T	NeoBundle 'ujihisa/unite-colorscheme'			"Unite colorscheme -auto-previewでカラースキームをプレビュー
+	NeoBundle 'ujihisa/unite-colorscheme'			"Unite colorscheme -auto-previewでカラースキームをプレビュー
 	NeoBundle 'nanotech/jellybeans.vim'
+	NeoBundle 'https://github.com/cocopon/iceberg.vim'
 "	NeoBundle 'adlawson/vim-sorcerer'
 "	NeoBundle 'duythinht/inori'
 
@@ -430,7 +440,7 @@ if neobundle#is_installed('nerdtree')
 	let g:NERDTreeMouseMode=3
 
 	"表示を見やすくする
-	"let g:NERDTreeMinimalUI=1
+	let g:NERDTreeMinimalUI=1
 
 	"NERDTreeウィンドウに行番号を表示する
 	"let NERDTreeShowLineNumbers=1
@@ -646,6 +656,39 @@ endif
 
 
 " ##
+" # CtrlP | ファイルのファジー検索
+" #
+if neobundle#is_installed('ctrlp.vim')
+
+	" デフォルトのマッピングを無効化(default:'<C-p>')
+	let g:ctrlp_map = '<Nop>'
+
+	" 対象ファイル最大数(default:10000)
+	let g:ctrlp_max_files  = 100000
+
+	" 検索対象の最大階層数(default:40)
+	let g:ctrlp_max_depth = 10
+
+	" vim終了時にキャッシュクリアしない(default:1)
+	let g:ctrlp_clear_cache_on_exit = 0
+
+	" 検索ウィンドウの設定
+	" :help g:ctrlp_match_window
+	let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:50'
+
+	 " カレントディレクトリを基準に検索
+	"nnoremap <silent> <C-f> :CtrlPCurWD<CR>
+
+	" カレントバッファのルートディレクトリを基準に検索(root:自動認識)
+	nnoremap <silent> <C-p> :CtrlPRoot<CR>
+
+	" 最近使ったファイルから検索
+	"nnoremap <silent> <C-r> :CtrlPMRUFiles<CR>
+
+endif
+
+
+" ##
 " # VDebug | デバッガ
 " #
 if neobundle#is_installed('vdebug.git')
@@ -717,8 +760,9 @@ if neobundle#is_installed('jellybeans.vim')
 
 	"正しく表示されないときは
 	"export TERM=xterm-256colorを.bashrcなどに記述する必要がある。
-	colorscheme jellybeans
-"	set bg=dark
+	"colorscheme jellybeans
+	set bg=dark
+	colorscheme iceberg
 
 endif
 
