@@ -116,7 +116,8 @@ NeoBundleFetch 'Shougo/neobundle.vim'
     " バッファ上、もしくはビジュアルモードで選択した範囲の文字列を翻訳する
     NeoBundle 'mattn/webapi-vim'
     NeoBundle 'mattn/excitetranslate-vim'
-
+    "ファイルをファジー検索できる
+	NeoBundle "ctrlpvim/ctrlp.vim"
 call neobundle#end()
 
 " Required:
@@ -185,7 +186,7 @@ if neobundle#is_installed('nerdtree')
 	let g:NERDTreeMouseMode=3
 
 	" 表示を見やすくする
-	"let g:NERDTreeMinimalUI=1
+	let g:NERDTreeMinimalUI=1
 
 	" NERDTreeウィンドウに行番号を表示する
 	"let NERDTreeShowLineNumbers=1
@@ -347,6 +348,40 @@ if neobundle#is_installed('lightline.vim')
 
 endif
 
+
+"---------------------------------------------------------------------------
+" プラグイン設定：ctrlp
+"
+if neobundle#is_installed('ctrlp.vim')
+
+	" デフォルトのマッピングを無効化(default:'<C-p>')
+	let g:ctrlp_map = '<Nop>'
+
+	" 対象ファイル最大数(default:10000)
+	let g:ctrlp_max_files  = 100000
+
+	" 検索対象の最大階層数(default:40)
+	let g:ctrlp_max_depth = 10
+
+	" vim終了時にキャッシュクリアしない(default:1)
+	let g:ctrlp_clear_cache_on_exit = 0
+
+	" 検索ウィンドウの設定
+	" :help g:ctrlp_match_window
+	let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:10,results:50'
+
+	 " カレントディレクトリを基準に検索
+	"nnoremap <silent> <C-f> :CtrlPCurWD<CR>
+
+	" カレントバッファのルートディレクトリを基準に検索(root:自動認識)
+	nnoremap <silent> <C-p> :CtrlPRoot<CR>
+
+	" 最近使ったファイルから検索
+	"nnoremap <silent> <C-r> :CtrlPMRUFiles<CR>
+
+endif
+
+
 "---------------------------------------------------------------------------
 " プラグイン設定：VimShell
 "
@@ -496,6 +531,12 @@ endif
 
 " trでエキサイト翻訳する
 CAlterCommand tr ExciteTranslate
+
+" PHPUnit test
+command! TS !phpunit %
+command! TS2 !phpunit % | less
+
+command! COLS Unite colorscheme -auto-preview
 
 "---------------------------------------------------------------------------
 " Python
