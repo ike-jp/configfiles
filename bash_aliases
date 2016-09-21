@@ -1,3 +1,13 @@
+echo 'loaded .bash_aliases'
+
+alias ls='ls -lah'
+alias ll='ls -lA'
+
+alias relogin='exec $SHELL -l'
+alias re=relogin
+
+alias grep='grep --color'
+alias make='mingw64-make'
 
 # bashのプロンプトにgitのbranch名を表示する
 #source ~/configfiles/opt/git-completion.bash
