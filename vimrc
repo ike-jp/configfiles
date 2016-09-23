@@ -400,11 +400,11 @@ autocmd BufEnter ==Translate==\ Excite nnoremap <buffer> <silent> q :<C-u>close<
 "
 "正しく表示されないときは
 "export TERM=xterm-256colorを.bashrcなどに記述する必要がある。
-colorscheme iceberg
+"colorscheme iceberg
 "colorscheme Wombat
 "colorscheme rdark
 "colorscheme railscasts
-"colorscheme jerrybeans
+colorscheme jellybeans
 "colorscheme fahrenheit
 
 "---------------------------------------------------------------------------
@@ -442,7 +442,7 @@ set softtabstop=4
 " 自動インデントでずれる幅
 set shiftwidth=4
 " タブをスペースに展開する/ しない (expandtab:展開する)
-set expandtab
+set noexpandtab
 " 自動的にインデントする (noautoindent:インデントしない)
 set autoindent
 " バックスペースでインデントや改行を削除できるようにする
@@ -536,7 +536,14 @@ CAlterCommand tr ExciteTranslate
 command! TS !phpunit %
 command! TS2 !phpunit % | less
 
-command! COLS Unite colorscheme -auto-preview
+" カラースキーム確認
+CAlterCommand cols Unite colorscheme -auto-preview
+
+" tab to space
+CAlterCommand t2s %!expand -t 4
+
+" space to tab
+CAlterCommand s2t %!unexpand -t 4
 
 "---------------------------------------------------------------------------
 " Python
