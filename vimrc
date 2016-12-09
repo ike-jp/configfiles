@@ -49,6 +49,7 @@ if s:is_installed_neobundle
 		NeoBundle "ctrlpvim/ctrlp.vim"				" ファイルをファジー検索できる
 		NeoBundle 'itchyny/lightline.vim'			" リッチなステータスバー
 		NeoBundle 'bronson/vim-trailing-whitespace'	" 行末の半角スペースを可視化 / FixWhitespaceで行末の余計な空白を掃除できる
+		NeoBundle 'editorconfig/editorconfig-vim'	" Editorconfig
 
 		" VimProc
 		if has("unix")
@@ -265,13 +266,13 @@ if s:neobundled('vim-watchdogs')
 	"#### Global
 
 	" 書き込み後に構文チェックを行う
-	let g:watchdogs_check_BufWritePost_enable = 0
+	let g:watchdogs_check_BufWritePost_enable = 1
 
 	" 一定時間キー入力がなかった場合に構文チェックを行う
-	let g:watchdogs_check_CursorHold_enable = 0
+	let g:watchdogs_check_CursorHold_enable = 1
 
 	" falseのとき:wq時に実行しない
-	let g:watchdogs_check_BufWritePost_enable_on_wq = 0
+	let g:watchdogs_check_BufWritePost_enable_on_wq = 1
 
 	" vim-hierでエラー箇所がハイライトされるので:WathcdogsRun後にquickfixウィンドウを自動的に閉じる
 	let g:quickrun_config['watchdogs_checker/_'] = {
@@ -566,6 +567,7 @@ CAlterCommand t2s %!expand -t 4
 
 " space to tab
 CAlterCommand s2t %!unexpand -t 4
+
 
 "---------------------------------------------------------------------------
 " Python

@@ -23,6 +23,23 @@
 	bra = branch
 	hist = log --pretty=format:\\\"%h %ad | %s%d [%an]\\\" --graph --date=short
 
+	# http://postd.cc/human-git-aliases/
+	branches = branch -a
+	tags = tag
+	stashes = stash list
+	unstage = reset -q HEAD --
+	discard = checkout --
+	uncommit = reset --mixed HEAD~
+	amend = commit --amend
+	graph = "log --graph -20 --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order"
+	precommit = diff --cached --diff-algorithm=minimal -w
+	unmerged = diff --name-only --diff-filter=U
+	remotes = remote -v
+	ultimateweapon = !git reset --hard HEAD && git clean -d -f
+	alias = config --get-regexp ^alias\\.
+	alias = --get-regexp
+	wip-commit = commit --no-verify
+
 [color]
 	ui = auto
 
@@ -30,3 +47,7 @@
 	# git fetchした際にリモートリポジトリで削除されているものを
 	# ローカルリポジトリでも削除する
 	prune = true
+[merge]
+	tool = vimdiff
+[push]
+	default = simple
